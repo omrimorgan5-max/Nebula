@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7f3">
+  <title>{{.DisplayName}} · Nebula</title>
+  <link rel="stylesheet" href="/static/css/public-profile.css">
+</head>
+<body class="public-profile accent-{{.Accent}}">
+  <header class="public-topbar">
+    <a class="public-brand" href="/" aria-label="Nebula"><span>n</span> nebula</a>
+    <span>PERSONAL SPACE</span>
+  </header>
+  <main class="public-content">
+    <section class="public-intro">
+      {{if .AvatarURL}}<img class="public-avatar" src="{{.AvatarURL}}" alt="{{.DisplayName}}" loading="lazy">{{else}}<span class="public-avatar public-avatar-initial" aria-hidden="true">{{slice .Username 0 1}}</span>{{end}}
+      <p class="public-handle">@{{.Username}}</p>
+      <h1>{{.DisplayName}}</h1>
+      {{if .Bio}}<p class="public-bio">{{.Bio}}</p>{{end}}
+    </section>
+    <section class="public-posts" aria-label="Public posts">
+      {{range .Posts}}
+      <article class="public-post">
+        <time>{{.CreatedAt}}</time>
+        <h2>{{.Title}}</h2>
+        <div class="public-post-content">{{.Content}}</div>
+      </article>
+      {{else}}
+      <p class="public-empty">Nothing published here yet.</p>
+      {{end}}
+    </section>
+  </main>
+  <footer class="public-footer"><span>NEBULA / PERSONAL SPACE</span><a href="/">Create your own space <span aria-hidden="true">↗</span></a></footer>
+</body>
+</html>

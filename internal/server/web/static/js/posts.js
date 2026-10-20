@@ -35,7 +35,8 @@ function renderPosts() {
     preview.textContent = item.content.slice(0, 110) || 'A blank page, waiting for a first line.';
     const status = document.createElement('span');
     status.className = `post-status ${item.status}`;
-    status.textContent = item.status === 'published' ? 'Ready · private' : 'Draft';
+    status.textContent = item.isPublic ? 'Public profile' : item.status === 'published' ? 'Ready · private' : 'Draft';
+    status.classList.toggle('public', item.isPublic);
     const date = document.createElement('time');
     date.textContent = formatDate(item.updatedAt);
     button.append(title, preview, status, date);
@@ -73,6 +74,8 @@ function openPost(id) {
   document.querySelector('#post-content').value = item.content;
   document.querySelector('#post-tags').value = (item.tags || []).join(', ');
   document.querySelector('#post-status').value = item.status;
+  document.querySelector('#post-public').checked = Boolean(item.isPublic);
+  syncPostPublicControl();
   document.querySelector('#post-editor').hidden = false;
   document.querySelector('#post-list').hidden = true;
   document.querySelector('.post-filters').hidden = true;
@@ -91,6 +94,16 @@ function closePostEditor() {
   renderPosts();
 }
 
+function syncPostPublicControl() {
+  const ready = document.querySelector('#post-status').value === 'published';
+  const control = document.querySelector('#post-public');
+  control.disabled = !ready;
+  if (!ready) control.checked = false;
+  document.querySelector('.post-visibility-help').textContent = ready
+    ? 'Requires your public profile to be enabled. Other posts stay private.'
+    : 'Set this post to Ready before adding it to your public profile.';
+}
+
 async function savePost() {
   const item = posts.find((post) => post.id === activePostID);
   if (!item) return;
@@ -98,6 +111,7 @@ async function savePost() {
   const content = document.querySelector('#post-content').value;
   const tags = parseTagsInput(document.querySelector('#post-tags').value);
   const status = document.querySelector('#post-status').value;
+  const isPublic = status === 'published' && document.querySelector('#post-public').checked;
   if (!title) {
     showToast('Add a title before saving.');
     document.querySelector('#post-title').focus();
@@ -109,9 +123,9 @@ async function savePost() {
     await api(`/api/posts/${item.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ title, content, tags, status }),
+      body: JSON.stringify({ title, content, tags, status, isPublic }),
     });
-    Object.assign(item, { title, content, tags, status, updatedAt: new Date().toISOString() });
+    Object.assign(item, { title, content, tags, status, isPublic, updatedAt: new Date().toISOString() });
     document.querySelector('#post-save-status').textContent = 'Saved privately just now';
     renderPosts();
     document.querySelector('#post-count').textContent = posts.length;

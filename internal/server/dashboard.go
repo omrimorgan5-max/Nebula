@@ -42,7 +42,7 @@ func (a *application) dashboard(w http.ResponseWriter, r *http.Request) {
 		writeError(w, http.StatusInternalServerError, "Could not load your dashboard.")
 		return
 	}
-	postRows, err := a.db.Query(`SELECT id, title, content, tags, status, created_at, updated_at FROM posts WHERE user_id = ? ORDER BY updated_at DESC, id DESC LIMIT 5`, current.ID)
+	postRows, err := a.db.Query(`SELECT id, title, content, tags, status, is_public, created_at, updated_at FROM posts WHERE user_id = ? ORDER BY updated_at DESC, id DESC LIMIT 5`, current.ID)
 	if err != nil {
 		writeError(w, http.StatusInternalServerError, "Could not load your dashboard.")
 		return
@@ -51,7 +51,7 @@ func (a *application) dashboard(w http.ResponseWriter, r *http.Request) {
 	for postRows.Next() {
 		var item post
 		var tags string
-		if err := postRows.Scan(&item.ID, &item.Title, &item.Content, &tags, &item.Status, &item.CreatedAt, &item.UpdatedAt); err != nil {
+		if err := postRows.Scan(&item.ID, &item.Title, &item.Content, &tags, &item.Status, &item.IsPublic, &item.CreatedAt, &item.UpdatedAt); err != nil {
 			postRows.Close()
 			writeError(w, http.StatusInternalServerError, "Could not load your dashboard.")
 			return

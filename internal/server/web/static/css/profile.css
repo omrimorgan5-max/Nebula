@@ -1,5 +1,7 @@
 .profile-dialog {
-  width: min(360px, calc(100vw - 32px));
+  width: min(440px, calc(100vw - 32px));
+  max-height: 90vh;
+  overflow-y: auto;
   padding: 24px 27px 27px;
   border: 1px solid var(--line);
   border-radius: 5px;
@@ -46,6 +48,117 @@
   margin: 9px 0 19px;
   color: var(--muted);
   font-size: 11px;
+}
+
+.profile-section-title {
+  margin: 0;
+  color: var(--ink);
+  font: 500 17px var(--serif);
+  text-align: left;
+}
+
+.profile-field {
+  display: grid;
+  gap: 6px;
+  margin: 13px 0;
+  color: #879087;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-align: left;
+}
+
+.profile-field input,
+.profile-field textarea,
+.profile-field select {
+  width: 100%;
+  min-height: 35px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--ink);
+  font: 11px var(--sans);
+  letter-spacing: 0;
+}
+
+.profile-field textarea {
+  resize: vertical;
+}
+
+.profile-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 12px 0;
+  color: #667066;
+  font-size: 10px;
+  line-height: 1.5;
+  text-align: left;
+}
+
+.profile-check input {
+  margin: 1px 0 0;
+  accent-color: var(--green);
+}
+
+.profile-public-toggle {
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: rgba(120, 148, 119, .06);
+}
+
+.profile-public-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+  font-size: 10px;
+}
+
+.profile-public-link a {
+  color: var(--green);
+  overflow-wrap: anywhere;
+}
+
+.profile-save {
+  width: 100%;
+  justify-content: center;
+  margin: 7px 0 17px;
+}
+
+.profile-divider {
+  margin: 4px 0 17px;
+  border-top: 1px solid var(--line);
+}
+
+.post-public-toggle {
+  margin: 17px 0 5px;
+}
+
+.post-visibility-help {
+  margin: 4px 0 12px;
+  text-align: left;
+}
+
+:root[data-theme="dark"] .profile-field {
+  color: #aab5aa;
+}
+
+:root[data-theme="dark"] .profile-field input,
+:root[data-theme="dark"] .profile-field textarea,
+:root[data-theme="dark"] .profile-field select {
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+:root[data-theme="dark"] .profile-check {
+  color: #c2cdc1;
+}
+
+:root[data-theme="dark"] .profile-public-toggle {
+  background: rgba(162, 196, 162, .07);
 }
 
 .profile-upload {

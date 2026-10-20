@@ -61,6 +61,12 @@ document.querySelector('#empty-post-create').addEventListener('click', createPos
 document.querySelector('#save-post').addEventListener('click', savePost);
 document.querySelector('#back-posts').addEventListener('click', closePostEditor);
 document.querySelector('#delete-post').addEventListener('click', deletePost);
+document.querySelector('#save-profile-settings').addEventListener('click', saveProfileSettings);
+document.querySelector('#copy-profile-url').addEventListener('click', copyPublicProfileLink);
+document.querySelector('#post-status').addEventListener('change', syncPostPublicControl);
+document.querySelector('#profile-public-enabled').addEventListener('change', (event) => {
+  if (!event.target.checked) document.querySelector('#profile-show-avatar').checked = false;
+});
 document.querySelectorAll('.post-filter').forEach((button) => button.addEventListener('click', () => {
   postFilter = button.dataset.postFilter;
   document.querySelectorAll('.post-filter').forEach((filter) => {
@@ -75,12 +81,6 @@ document.querySelector('#upload-drop').addEventListener('click', () => document.
 document.querySelector('#upload-drop').addEventListener('dragover', (event) => { event.preventDefault(); event.currentTarget.classList.add('dragging'); });
 document.querySelector('#upload-drop').addEventListener('dragleave', (event) => event.currentTarget.classList.remove('dragging'));
 document.querySelector('#upload-drop').addEventListener('drop', (event) => { event.preventDefault(); event.currentTarget.classList.remove('dragging'); uploadFiles(event.dataTransfer.files); });
-document.querySelector('#signout').addEventListener('click', async () => {
-  try { await api('/api/auth/signout', { method: 'POST' }); } catch (error) { showError(error); }
-  showAuth();
-});
-document.querySelector('#theme-toggle').addEventListener('click', changeTheme);
-document.querySelector('#avatar-button').addEventListener('click', () => document.querySelector('#profile-dialog').showModal());
 document.querySelector('#avatar-input').addEventListener('change', (event) => uploadAvatar(event.target.files[0]));
 document.querySelector('#remove-avatar').addEventListener('click', removeAvatar);
 document.querySelector('#open-sidebar').addEventListener('click', openSidebar);

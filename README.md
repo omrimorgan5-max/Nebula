@@ -53,6 +53,8 @@ The editor supports font family, bold, and italic formatting. Notes are sanitize
 
 ## Dashboard and writing
 
-The dashboard summarizes your private notes, posts, and files and links to recent work. Notes and posts support searchable tags; notes can also be searched from the sidebar and pinned. Existing databases are upgraded in place when the app starts. Posts use **Draft** and **Ready · private** states; neither state exposes a public URL.
+The dashboard summarizes your private notes, posts, and files and links to recent work. Notes and posts support searchable tags; notes can also be searched from the sidebar and pinned. Existing databases are upgraded in place when the app starts. Posts use **Draft** and **Ready · private** states by default.
+
+Public profiles are opt-in at `/u/<username>`. Owners can customize their display name, bio, and accent. Enabling the profile does not expose posts: each Ready post must separately be selected for the public profile. Profile pictures also have their own visibility setting. Turning off the profile revokes all post-publication selections; re-enabling it does not republish them.
 
 Unsaved note edits are kept in browser storage scoped to the signed-in username and note, restored after reload, and retried automatically when the server is unavailable. Successfully synced drafts are removed from browser storage.

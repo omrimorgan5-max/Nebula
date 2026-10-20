@@ -44,6 +44,11 @@
   color: #b9d9bb;
 }
 
+:root[data-theme="dark"] .post-status.public {
+  background: #293c45;
+  color: #b5d6e1;
+}
+
 :root[data-theme="dark"] .post-search input {
   color: var(--ink);
 }

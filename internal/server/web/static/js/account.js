@@ -36,11 +36,74 @@ async function showWorkspace(user) {
   applyTheme(user.theme || 'light');
   document.querySelector('#today-label').textContent = new Intl.DateTimeFormat(undefined, { weekday: 'short', month: 'short', day: 'numeric' }).format(new Date());
   document.querySelector('#dashboard-greeting').textContent = `A little room to think, ${user.username}.`;
+  loadProfileSettings().catch(showError);
   switchView(viewFromPath(), false, false);
   loadNotes().catch(showError);
   loadPosts().catch(showError);
   refreshDashboard().catch(showError);
   if (viewFromPath() === 'files') loadFiles().catch(showError);
+}
+
+async function loadProfileSettings() {
+  const settings = await api('/api/profile');
+  document.querySelector('#profile-display-name').value = settings.displayName;
+  document.querySelector('#profile-bio').value = settings.bio;
+  document.querySelector('#profile-accent').value = settings.accent;
+  document.querySelector('#profile-public-enabled').checked = settings.publicEnabled;
+  document.querySelector('#profile-show-avatar').checked = settings.showAvatar;
+  renderPublicProfileLink(settings);
+}
+
+function renderPublicProfileLink(settings) {
+  const linkRegion = document.querySelector('#profile-public-link');
+  const link = document.querySelector('#public-profile-url');
+  linkRegion.hidden = !settings.publicEnabled;
+  document.querySelector('#profile-show-avatar').checked = settings.showAvatar;
+  if (!settings.publicEnabled) return;
+  link.href = settings.publicUrl;
+  link.textContent = `${window.location.origin}${settings.publicUrl}`;
+}
+
+async function saveProfileSettings() {
+  const button = document.querySelector('#save-profile-settings');
+  button.disabled = true;
+  const payload = {
+    displayName: document.querySelector('#profile-display-name').value,
+    bio: document.querySelector('#profile-bio').value,
+    accent: document.querySelector('#profile-accent').value,
+    publicEnabled: document.querySelector('#profile-public-enabled').checked,
+    showAvatar: document.querySelector('#profile-show-avatar').checked,
+  };
+  try {
+    const settings = await api('/api/profile', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    document.querySelector('#profile-public-enabled').checked = settings.publicEnabled;
+    renderPublicProfileLink(settings);
+    if (!settings.publicEnabled) {
+      posts.forEach((item) => { item.isPublic = false; });
+      if (activePostID) document.querySelector('#post-public').checked = false;
+      renderPosts();
+      refreshDashboard().catch(showError);
+    }
+    showToast(settings.publicEnabled ? 'Public profile settings saved.' : 'Profile is private.');
+  } catch (error) {
+    showError(error);
+  } finally {
+    button.disabled = false;
+  }
+}
+
+async function copyPublicProfileLink() {
+  const link = document.querySelector('#public-profile-url');
+  try {
+    await navigator.clipboard.writeText(link.href);
+    showToast('Profile link copied.');
+  } catch {
+    showToast('Could not copy the profile link.');
+  }
 }
 
 function showAuth() {
@@ -145,3 +208,10 @@ function setSaveStatus(status, text) {
   saveState.classList.toggle('error', status === 'error');
   saveState.querySelector('span:last-child').textContent = text;
 }
+
+document.querySelector('#theme-toggle').addEventListener('click', changeTheme);
+document.querySelector('#avatar-button').addEventListener('click', () => document.querySelector('#profile-dialog').showModal());
+document.querySelector('#signout').addEventListener('click', async () => {
+  try { await api('/api/auth/signout', { method: 'POST' }); } catch (error) { showError(error); }
+  showAuth();
+});

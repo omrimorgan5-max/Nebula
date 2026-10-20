@@ -143,6 +143,11 @@
   color: #4d7353;
 }
 
+.post-status.public {
+  background: #e5edf1;
+  color: #3c6272;
+}
+
 .post-row time {
   grid-column: 3;
   grid-row: 1 / span 2;

@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"database/sql"
 	"encoding/json"
+	"html/template"
 	"net/http"
 	"net/http/cookiejar"
 	"net/http/httptest"
@@ -29,8 +30,8 @@ func testApplication(t *testing.T) (*application, http.Handler) {
 		CREATE TABLE sessions (token_hash TEXT PRIMARY KEY, user_id INTEGER NOT NULL REFERENCES users(id), expires_at DATETIME NOT NULL);
 		CREATE TABLE notes (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER NOT NULL REFERENCES users(id), title TEXT NOT NULL, content TEXT NOT NULL DEFAULT '', tags TEXT NOT NULL DEFAULT '[]', updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, pinned INTEGER NOT NULL DEFAULT 0);
 		CREATE TABLE uploads (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER NOT NULL REFERENCES users(id), name TEXT NOT NULL, disk_name TEXT NOT NULL, size INTEGER NOT NULL, created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP);
-		CREATE TABLE profiles (user_id INTEGER PRIMARY KEY REFERENCES users(id), theme TEXT NOT NULL DEFAULT 'light', avatar_name TEXT NOT NULL DEFAULT '');
-		CREATE TABLE posts (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER NOT NULL REFERENCES users(id), title TEXT NOT NULL, content TEXT NOT NULL DEFAULT '', tags TEXT NOT NULL DEFAULT '[]', status TEXT NOT NULL DEFAULT 'draft', created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP);`)
+		CREATE TABLE profiles (user_id INTEGER PRIMARY KEY REFERENCES users(id), theme TEXT NOT NULL DEFAULT 'light', avatar_name TEXT NOT NULL DEFAULT '', public_enabled INTEGER NOT NULL DEFAULT 0, display_name TEXT NOT NULL DEFAULT '', bio TEXT NOT NULL DEFAULT '', accent TEXT NOT NULL DEFAULT 'moss', show_avatar INTEGER NOT NULL DEFAULT 0);
+		CREATE TABLE posts (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER NOT NULL REFERENCES users(id), title TEXT NOT NULL, content TEXT NOT NULL DEFAULT '', tags TEXT NOT NULL DEFAULT '[]', status TEXT NOT NULL DEFAULT 'draft', is_public INTEGER NOT NULL DEFAULT 0, created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP);`)
 	if err != nil {
 		db.Close()
 		t.Fatal(err)
@@ -39,10 +40,16 @@ func testApplication(t *testing.T) (*application, http.Handler) {
 	policy := bluemonday.NewPolicy()
 	policy.AllowElements("p", "b", "strong", "i", "em")
 	policy.AllowAttrs("face").OnElements("font")
-	app := &application{db: db, root: filepath.Join(root, "files"), secure: false, sanitizer: policy}
+	templates, err := template.ParseFS(webFiles, "web/templates/*.html")
+	if err != nil {
+		t.Fatal(err)
+	}
+	app := &application{db: db, root: filepath.Join(root, "files"), secure: false, sanitizer: policy, templates: templates}
 	mux := http.NewServeMux()
 	mux.HandleFunc("POST /api/auth/signup", app.signUp)
 	mux.HandleFunc("GET /api/dashboard", app.dashboard)
+	mux.HandleFunc("GET /api/profile", app.getProfileSettings)
+	mux.HandleFunc("PUT /api/profile", app.updateProfileSettings)
 	mux.HandleFunc("GET /api/notes", app.listNotes)
 	mux.HandleFunc("POST /api/notes", app.createNote)
 	mux.HandleFunc("PATCH /api/notes/{id}/pin", app.pinNote)
@@ -50,7 +57,9 @@ func testApplication(t *testing.T) (*application, http.Handler) {
 	mux.HandleFunc("POST /api/posts", app.createPost)
 	mux.HandleFunc("PUT /api/posts/{id}", app.updatePost)
 	mux.HandleFunc("DELETE /api/posts/{id}", app.deletePost)
-	return app, mux
+	mux.HandleFunc("GET /u/{username}", app.publicProfile)
+	mux.HandleFunc("GET /u/{username}/avatar", app.publicAvatar)
+	return app, securityHeaders(mux)
 }
 
 func testClient(t *testing.T, server *httptest.Server, username string) *http.Client {
@@ -147,6 +156,39 @@ func TestPrivatePostsPinnedNotesAndDashboard(t *testing.T) {
 		t.Fatalf("dashboard leaked another account's content: %+v", otherDashboard)
 	}
 	sendJSON(t, second, http.MethodPut, server.URL+"/api/posts/"+jsonNumber(createdPost.ID), `{"title":"Changed","content":"No","status":"published"}`, http.StatusNotFound, nil)
+}
+
+func TestEnsurePublicVisibilityColumnsDefaultPrivate(t *testing.T) {
+	db, err := sql.Open("sqlite", filepath.Join(t.TempDir(), "old-public.db"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer db.Close()
+	if _, err := db.Exec(`CREATE TABLE profiles (user_id INTEGER PRIMARY KEY); CREATE TABLE posts (id INTEGER PRIMARY KEY)`); err != nil {
+		t.Fatal(err)
+	}
+	if err := ensurePublicProfileColumns(db); err != nil {
+		t.Fatal(err)
+	}
+	if err := ensurePublicPostColumn(db); err != nil {
+		t.Fatal(err)
+	}
+	var profileEnabled, avatarVisible, postVisible int
+	if err := db.QueryRow(`SELECT public_enabled, show_avatar FROM profiles LIMIT 1`).Scan(&profileEnabled, &avatarVisible); err != sql.ErrNoRows {
+		t.Fatalf("expected empty profile table before inserts, got %v", err)
+	}
+	if _, err := db.Exec(`INSERT INTO profiles(user_id) VALUES(1); INSERT INTO posts(id) VALUES(1)`); err != nil {
+		t.Fatal(err)
+	}
+	if err := db.QueryRow(`SELECT public_enabled, show_avatar FROM profiles WHERE user_id = 1`).Scan(&profileEnabled, &avatarVisible); err != nil {
+		t.Fatal(err)
+	}
+	if err := db.QueryRow(`SELECT is_public FROM posts WHERE id = 1`).Scan(&postVisible); err != nil {
+		t.Fatal(err)
+	}
+	if profileEnabled != 0 || avatarVisible != 0 || postVisible != 0 {
+		t.Fatalf("public visibility migration did not default to private: profile=%d avatar=%d post=%d", profileEnabled, avatarVisible, postVisible)
+	}
 }
 
 func TestEnsureNotePinnedColumnMigratesExistingSchema(t *testing.T) {

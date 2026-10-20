@@ -9,6 +9,8 @@
             <input class="content-tags-input post-tags-input" id="post-tags" type="text" maxlength="300" placeholder="Add tags, separated by commas" aria-label="Post tags">
             <p class="post-lede">A thought, a story, a moment worth writing down.</p>
             <textarea class="post-content" id="post-content" maxlength="1000000" placeholder="Start writing..." aria-label="Post content"></textarea>
+            <label class="profile-check post-public-toggle"><input id="post-public" type="checkbox"><span>Show this post on my public profile</span></label>
+            <p class="profile-copy post-visibility-help">Only published posts with this option enabled appear publicly.</p>
             <div class="post-editor-footer"><span id="post-save-status">Saved privately</span><div><label class="status-label" for="post-status">STATUS</label><select id="post-status"><option value="draft">Draft</option><option value="published">Ready · private</option></select><button class="primary-button" id="save-post" type="button">Save post</button></div></div>
           </div>
           <div class="posts-empty" id="posts-empty" hidden><span class="eyebrow">A NEW PAGE</span><h2>Your next story starts here.</h2><p>Collect the longer thoughts in one quiet place.</p><button class="primary-button" id="empty-post-create" type="button">Write your first post <span aria-hidden="true">↗</span></button></div>

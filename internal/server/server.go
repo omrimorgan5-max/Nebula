@@ -50,6 +50,7 @@ type note struct {
 	Content   string    `json:"content"`
 	Tags      []string  `json:"tags"`
 	Pinned    bool      `json:"pinned"`
+	IsPublic  bool      `json:"isPublic"`
 	UpdatedAt time.Time `json:"updatedAt"`
 }
 
@@ -59,8 +60,18 @@ type post struct {
 	Content   string    `json:"content"`
 	Tags      []string  `json:"tags"`
 	Status    string    `json:"status"`
+	IsPublic  bool      `json:"isPublic"`
 	CreatedAt time.Time `json:"createdAt"`
 	UpdatedAt time.Time `json:"updatedAt"`
+}
+
+type profileSettings struct {
+	DisplayName   string `json:"displayName"`
+	Bio           string `json:"bio"`
+	Accent        string `json:"accent"`
+	PublicEnabled bool   `json:"publicEnabled"`
+	ShowAvatar    bool   `json:"showAvatar"`
+	PublicURL     string `json:"publicUrl,omitempty"`
 }
 
 type storedFile struct {
@@ -113,7 +124,12 @@ func Run() {
 		CREATE TABLE IF NOT EXISTS profiles (
 			user_id INTEGER PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
 			theme TEXT NOT NULL DEFAULT 'light' CHECK(theme IN ('light', 'dark')),
-			avatar_name TEXT NOT NULL DEFAULT ''
+			avatar_name TEXT NOT NULL DEFAULT '',
+			public_enabled INTEGER NOT NULL DEFAULT 0,
+			display_name TEXT NOT NULL DEFAULT '',
+			bio TEXT NOT NULL DEFAULT '',
+			accent TEXT NOT NULL DEFAULT 'moss',
+			show_avatar INTEGER NOT NULL DEFAULT 0
 		);
 		CREATE TABLE IF NOT EXISTS posts (
 			id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -122,6 +138,8 @@ func Run() {
 			content TEXT NOT NULL DEFAULT '',
 			tags TEXT NOT NULL DEFAULT '[]',
 			status TEXT NOT NULL DEFAULT 'draft' CHECK(status IN ('draft', 'published')),
+			is_public INTEGER NOT NULL DEFAULT 0,
+			is_public INTEGER NOT NULL DEFAULT 0,
 			created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 			updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 		);`); err != nil {
@@ -132,6 +150,12 @@ func Run() {
 	}
 	if err := ensureContentTagsColumns(db); err != nil {
 		logFatal("upgrade content tags", err)
+	}
+	if err := ensurePublicProfileColumns(db); err != nil {
+		logFatal("upgrade public profile settings", err)
+	}
+	if err := ensurePublicPostColumn(db); err != nil {
+		logFatal("upgrade public post visibility", err)
 	}
 	if err := os.Chmod(filepath.Join(root, "nebula.db"), 0600); err != nil && !errors.Is(err, os.ErrNotExist) {
 		log.Printf("set database permissions: %v", err)
@@ -160,6 +184,8 @@ func Run() {
 	mux.HandleFunc("POST /api/auth/signin", app.signIn)
 	mux.HandleFunc("POST /api/auth/signout", app.signOut)
 	mux.HandleFunc("GET /api/me", app.me)
+	mux.HandleFunc("GET /api/profile", app.getProfileSettings)
+	mux.HandleFunc("PUT /api/profile", app.updateProfileSettings)
 	mux.HandleFunc("GET /api/dashboard", app.dashboard)
 	mux.HandleFunc("PUT /api/preferences", app.updatePreferences)
 	mux.HandleFunc("GET /api/avatar", app.getAvatar)
@@ -174,6 +200,8 @@ func Run() {
 	mux.HandleFunc("POST /api/posts", app.createPost)
 	mux.HandleFunc("PUT /api/posts/{id}", app.updatePost)
 	mux.HandleFunc("DELETE /api/posts/{id}", app.deletePost)
+	mux.HandleFunc("GET /u/{username}", app.publicProfile)
+	mux.HandleFunc("GET /u/{username}/avatar", app.publicAvatar)
 	mux.HandleFunc("GET /api/files", app.listFiles)
 	mux.HandleFunc("POST /api/files", app.uploadFile)
 	mux.HandleFunc("GET /api/files/{id}/download", app.downloadFile)

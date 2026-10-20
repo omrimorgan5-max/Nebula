@@ -2,7 +2,18 @@
       <form method="dialog" class="dialog-close-row"><button class="icon-button" aria-label="Close profile settings" title="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></form>
       <div class="profile-preview"><span class="avatar profile-avatar" id="profile-avatar-initial">A</span><img class="avatar profile-avatar" id="profile-avatar-image" alt="Profile picture preview" hidden></div>
       <p class="eyebrow">YOUR ACCOUNT</p>
-      <h2 id="profile-title">Profile picture</h2>
+      <h2 id="profile-title">Your public profile</h2>
+      <p class="profile-copy">Choose what visitors can see. Your profile and posts stay private until you turn them on.</p>
+      <label class="profile-field" for="profile-display-name">DISPLAY NAME<input id="profile-display-name" type="text" maxlength="80" placeholder="How you want to appear"></label>
+      <label class="profile-field" for="profile-bio">BIO<textarea id="profile-bio" maxlength="280" rows="3" placeholder="A few words about you"></textarea></label>
+      <label class="profile-field" for="profile-accent">ACCENT<select id="profile-accent"><option value="moss">Moss</option><option value="ocean">Ocean</option><option value="clay">Clay</option><option value="plum">Plum</option></select></label>
+      <label class="profile-check"><input id="profile-show-avatar" type="checkbox"><span>Show profile picture publicly</span></label>
+      <label class="profile-check profile-public-toggle"><input id="profile-public-enabled" type="checkbox"><span>Make my profile public</span></label>
+      <p class="profile-copy" id="profile-visibility-help">Public profiles show only posts you mark as public.</p>
+      <div class="profile-public-link" id="profile-public-link" hidden><a id="public-profile-url" href="#" target="_blank" rel="noreferrer">View public profile</a><button class="text-button" id="copy-profile-url" type="button">Copy link</button></div>
+      <button class="primary-button profile-save" id="save-profile-settings" type="button">Save profile settings</button>
+      <div class="profile-divider"></div>
+      <h3 class="profile-section-title">Profile picture</h3>
       <p class="profile-copy">Choose a PNG, JPEG, or GIF up to 5 MB.</p>
       <label class="primary-button profile-upload" for="avatar-input">Choose a picture<input id="avatar-input" type="file" accept="image/png,image/jpeg,image/gif" hidden></label>
       <button class="text-button remove-avatar" id="remove-avatar" type="button" hidden>Remove picture</button>

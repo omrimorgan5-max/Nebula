@@ -114,7 +114,9 @@ function renderRecentItems(selector, items, kind) {
     copy.append(title, preview);
     const meta = document.createElement('span');
     meta.className = 'recent-meta';
-    meta.textContent = kind === 'post' ? (item.status === 'published' ? 'Ready · private' : 'Draft') : formatDate(item.updatedAt);
+    meta.textContent = kind === 'post'
+      ? (item.isPublic ? 'Public profile' : item.status === 'published' ? 'Ready · private' : 'Draft')
+      : formatDate(item.updatedAt);
     button.append(copy, meta);
     list.append(button);
   }
