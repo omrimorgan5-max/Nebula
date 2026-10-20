@@ -1,0 +1,263 @@
+.workspace {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  animation: fade-in .35s ease both;
+}
+
+.sidebar {
+  position: fixed;
+  z-index: 5;
+  inset: 0 auto 0 0;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 17px;
+  border-right: 1px solid var(--line);
+  background: #fbfcf9;
+}
+
+.side-top {
+  height: 69px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 7px;
+  border-bottom: 1px solid var(--line);
+}
+
+.side-brand {
+  font-size: 17px;
+}
+
+.side-brand .brand-mark {
+  width: 24px;
+  height: 24px;
+}
+
+.side-section-heading,
+.note-list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 23px 7px 10px;
+  color: #969c94;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .13em;
+}
+
+.private-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #829181;
+  font-size: 8px;
+  letter-spacing: .08em;
+}
+
+.private-label span,
+.private-indicator span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #6f987a;
+}
+
+.nav-item {
+  width: 100%;
+  height: 39px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 0 9px;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: #687168;
+  cursor: pointer;
+  text-align: left;
+  font-size: 12px;
+}
+
+.nav-item svg,
+.icon-button svg,
+.text-button svg,
+.upload-button svg,
+.upload-icon svg,
+.empty-file-icon svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.nav-item.selected {
+  background: #eaf0e9;
+  color: var(--green);
+  font-weight: 600;
+}
+
+.nav-count {
+  margin-left: auto;
+  color: #a2a89f;
+  font-size: 10px;
+}
+
+.side-rule {
+  height: 1px;
+  margin: 17px 7px 0;
+  background: var(--line);
+}
+
+.note-list-heading {
+  padding-top: 18px;
+  padding-bottom: 7px;
+}
+
+.icon-button {
+  width: 31px;
+  height: 31px;
+  display: inline-grid;
+  place-items: center;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background: transparent;
+  color: #818980;
+  cursor: pointer;
+}
+
+.icon-button:hover {
+  border-color: var(--line);
+  background: #fff;
+  color: var(--green);
+}
+
+.icon-button svg {
+  width: 17px;
+  height: 17px;
+}
+
+.icon-button.small {
+  width: 24px;
+  height: 24px;
+}
+
+.icon-button.small svg {
+  width: 15px;
+  height: 15px;
+}
+
+.note-list {
+  flex: 1;
+  overflow: auto;
+  padding: 2px 0 14px;
+}
+
+.note-list-item {
+  width: 100%;
+  display: block;
+  margin: 2px 0;
+  padding: 10px 10px 9px;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: #555e56;
+  cursor: pointer;
+  text-align: left;
+}
+
+.note-list-item:hover {
+  background: #f0f3ee;
+}
+
+.note-list-item.active {
+  background: #eef2ec;
+}
+
+.note-list-title {
+  overflow: hidden;
+  display: block;
+  color: #48534a;
+  font-size: 11px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.note-list-preview {
+  overflow: hidden;
+  display: block;
+  margin-top: 4px;
+  color: #9a9f98;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.note-list-empty {
+  padding: 13px 9px;
+  color: #a0a69e;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.sidebar-bottom {
+  margin-top: auto;
+}
+
+.storage-tip {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 0 4px 14px;
+  padding: 13px 11px;
+  border: 1px solid #e6eae3;
+  border-radius: 3px;
+  background: #f5f7f2;
+  color: #858d83;
+  font: 11px/1.5 var(--serif);
+}
+
+.tip-mark {
+  color: var(--coral);
+  font: 19px var(--sans);
+}
+
+.account-row {
+  min-height: 61px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  border-top: 1px solid var(--line);
+}
+
+.avatar {
+  width: 27px;
+  height: 27px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #dfe8de;
+  color: var(--green);
+  font: 600 12px var(--serif);
+}
+
+.account-name {
+  overflow: hidden;
+  color: #555e56;
+  font-size: 11px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.signout-button {
+  margin-left: auto;
+}
+
+.workspace-main {

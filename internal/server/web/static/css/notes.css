@@ -1,0 +1,277 @@
+.notes-view {
+  min-height: calc(100vh - 69px);
+}
+
+.empty-state {
+  min-height: calc(100vh - 69px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 35px;
+  text-align: center;
+  animation: rise-in .45s ease both;
+}
+
+.empty-illustration {
+  position: relative;
+  width: 110px;
+  height: 93px;
+  margin-bottom: 19px;
+}
+
+.empty-sun {
+  position: absolute;
+  top: 3px;
+  right: 7px;
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  background: #edc47e;
+}
+
+.empty-page {
+  position: absolute;
+  left: 13px;
+  top: 19px;
+  width: 62px;
+  height: 68px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 20px 12px;
+  border: 1px solid #d9dfd6;
+  border-radius: 2px;
+  background: #fffefa;
+  box-shadow: 8px 7px 0 #e5ebe2;
+  transform: rotate(-5deg);
+}
+
+.empty-page i {
+  height: 1px;
+  background: #cbd7ca;
+}
+
+.empty-page i:last-child {
+  width: 65%;
+}
+
+.empty-state .eyebrow {
+  margin: 0 0 11px;
+}
+
+.empty-state h2 {
+  margin: 0;
+  font: 500 30px var(--serif);
+}
+
+.empty-state>p:not(.eyebrow) {
+  margin: 10px 0 21px;
+  color: #858d84;
+  font-size: 12px;
+}
+
+.empty-create {
+  min-height: 39px;
+}
+
+.editor {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 49px 0 32px;
+  animation: rise-in .35s ease both;
+}
+
+.editor-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.editor-meta {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #9aa097;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .1em;
+}
+
+.editor-meta .eyebrow {
+  font-size: 9px;
+}
+
+.meta-divider {
+  color: #c9cec6;
+}
+
+.text-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 0 6px 8px;
+  border: 0;
+  background: none;
+  color: #9b8c84;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+.text-button:hover {
+  color: #b74f3c;
+}
+
+.text-button svg {
+  width: 14px;
+  height: 14px;
+}
+
+.note-title {
+  width: 100%;
+  margin: 23px 0 15px;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #282e29;
+  font: 500 36px/1.25 var(--serif);
+}
+
+.note-title::placeholder {
+  color: #c6cbc3;
+}
+
+.note-title:focus-visible {
+  outline: 0;
+}
+
+.editor-toolbar {
+  height: 43px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 9px;
+  border: 1px solid #e4e8e0;
+  border-radius: 3px 3px 0 0;
+  background: #fbfcf9;
+}
+
+.font-label {
+  margin: 0 4px 0 1px;
+  color: #a0a69d;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .1em;
+}
+
+.editor-toolbar select {
+  width: 125px;
+  height: 27px;
+  padding: 0 7px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  background: transparent;
+  color: #697168;
+  font-size: 10px;
+}
+
+.editor-toolbar select:hover {
+  border-color: var(--line);
+}
+
+.toolbar-divider {
+  width: 1px;
+  height: 19px;
+  margin: 0 6px;
+  background: var(--line);
+}
+
+.format-button {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  background: transparent;
+  color: #657066;
+  cursor: pointer;
+}
+
+.format-button:hover,
+.format-button.active {
+  border-color: #dfe6dd;
+  background: #edf2ec;
+  color: var(--green);
+}
+
+.format-button strong {
+  font-family: Georgia, serif;
+  font-size: 13px;
+}
+
+.italic-button em {
+  font: italic 14px Georgia, serif;
+}
+
+.toolbar-spacer {
+  flex: 1;
+}
+
+.word-count {
+  color: #a3a89f;
+  font-size: 9px;
+}
+
+.editor-canvas {
+  min-height: min(52vh, 480px);
+  padding: 24px 26px 30px;
+  border: 1px solid #e4e8e0;
+  border-top: 0;
+  border-radius: 0 0 3px 3px;
+  background: #fff;
+  color: #505850;
+  font: 15px/1.85 Georgia, serif;
+  outline: none;
+  overflow-wrap: anywhere;
+}
+
+.editor-canvas:empty::before {
+  content: attr(data-placeholder);
+  color: #bcc2b9;
+  pointer-events: none;
+}
+
+.editor-canvas p {
+  margin: 0 0 .8em;
+}
+
+.editor-canvas b,
+.editor-canvas strong {
+  color: #343b35;
+}
+
+.editor-canvas:focus-visible {
+  outline: 0;
+  border-color: #cfd9ce;
+}
+
+.editor-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 1px;
+  color: #9ba199;
+  font-size: 9px;
+}
+
+.private-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #859287;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .08em;
+}

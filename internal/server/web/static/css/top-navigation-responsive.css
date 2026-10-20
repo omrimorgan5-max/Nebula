@@ -1,0 +1,130 @@
+@media (max-width: 760px) {
+  .workspace-header {
+    min-height: 102px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: 56px 45px;
+    gap: 0 10px;
+    padding: 0 15px;
+  }
+
+  .workspace-brand {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .top-account {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .top-account .account-name {
+    max-width: 78px;
+    font-size: 10px;
+  }
+
+  .top-nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .top-nav .nav-item {
+    min-width: 74px;
+    padding: 0 8px;
+    font-size: 10px;
+  }
+
+  .top-nav .nav-item.selected::after {
+    right: 8px;
+    left: 8px;
+  }
+
+  .workspace-main {
+    min-height: calc(100vh - 102px);
+  }
+
+  .content-area {
+    min-height: calc(100vh - 102px);
+    padding: 0 20px;
+  }
+
+  .notes-view {
+    min-height: calc(100vh - 102px);
+    display: block;
+  }
+
+  .notes-sidebar {
+    position: fixed;
+    z-index: 12;
+    top: 102px;
+    bottom: 0;
+    left: 0;
+    width: min(300px, calc(100vw - 45px));
+    min-height: 0;
+    padding: 23px 18px 18px;
+    border-right: 1px solid var(--line);
+    background: var(--paper);
+    box-shadow: 8px 0 30px rgba(21, 39, 25, .08);
+    transform: translateX(-105%);
+    transition: transform .22s ease;
+  }
+
+  .workspace.sidebar-open .notes-sidebar {
+    transform: translateX(0);
+  }
+
+  .notes-sidebar .note-list {
+    max-height: none;
+  }
+
+  .workspace.sidebar-open .sidebar-scrim {
+    position: fixed;
+    z-index: 11;
+    inset: 102px 0 0;
+    display: block;
+    background: rgba(24, 34, 27, .22);
+  }
+
+  .mobile-notes-toggle {
+    display: inline-grid;
+  }
+
+  .notes-main {
+    min-height: calc(100vh - 102px);
+  }
+
+  .notes-main .empty-state {
+    min-height: calc(100vh - 155px);
+  }
+
+  .notes-main .editor {
+    padding: 25px 0;
+  }
+}
+
+@media (max-width: 390px) {
+  .workspace-header {
+    padding: 0 10px;
+  }
+
+  .top-account {
+    gap: 4px;
+  }
+
+  .top-account .account-name {
+    max-width: 62px;
+  }
+
+  .top-nav .nav-item {
+    min-width: 68px;
+    gap: 5px;
+    padding: 0 5px;
+    font-size: 9px;
+  }
+
+  .content-area {
+    padding: 0 14px;
+  }
+}

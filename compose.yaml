@@ -1,0 +1,23 @@
+services:
+  nebula:
+    build: .
+    restart: unless-stopped
+    environment:
+      ADDR: ":8080"
+      DATA_DIR: /data
+      COOKIE_SECURE: "auto"
+    ports:
+      - "8080:8080"
+    volumes:
+      - nebula-data:/data
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    profiles: ["tunnel"]
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
+    depends_on:
+      - nebula
+
+volumes:
+  nebula-data:

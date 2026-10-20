@@ -1,0 +1,13 @@
+  <div class="workspace" id="workspace" hidden>
+    <header class="workspace-header">
+      <a class="brand workspace-brand" href="/dashboard" aria-label="Nebula dashboard"><span class="brand-mark" aria-hidden="true">n</span><span>nebula</span></a>
+      <nav class="top-nav" aria-label="Main navigation">
+        <button class="nav-item selected" id="dashboard-nav" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1"/><rect x="13.5" y="3.5" width="7" height="7" rx="1"/><rect x="3.5" y="13.5" width="7" height="7" rx="1"/><rect x="13.5" y="13.5" width="7" height="7" rx="1"/></svg><span>Overview</span></button>
+        <button class="nav-item" id="notes-nav" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.75h7l4 4v12.5H7a2 2 0 0 1-2-2v-12.5a2 2 0 0 1 2-2Z"/><path d="M14 4v4h4M8.5 12h7M8.5 15.5h7"/></svg><span>Notes</span><span class="nav-count" id="note-count">0</span></button>
+        <button class="nav-item" id="posts-nav" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h14v15H5zM8 8h8M8 11.5h8M8 15h5"/></svg><span>Posts</span><span class="nav-count" id="post-count">0</span></button>
+        <button class="nav-item" id="files-nav" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3m0 0L8 7m4-4 4 4"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg><span>Files</span><span class="nav-count" id="file-count">0</span></button>
+      </nav>
+      <div class="top-account"><span class="account-name" id="account-name">Account</span><button class="avatar avatar-trigger" id="avatar-button" type="button" aria-label="Edit profile picture" title="Edit profile picture"><span id="avatar-initial">A</span><img id="avatar-image" alt="" hidden></button><button class="icon-button theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme" title="Switch to dark theme"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.2 15.4A8.5 8.5 0 0 1 8.6 3.8 8.5 8.5 0 1 0 20.2 15.4Z"/></svg></button><button class="icon-button signout-button" id="signout" type="button" aria-label="Sign out" title="Sign out"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 17l5-5-5-5M15 12H3"/><path d="M12 3h6a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-6"/></svg></button></div>
+    </header>
+    <div class="workspace-main">
+      <main class="content-area">

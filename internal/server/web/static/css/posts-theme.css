@@ -1,0 +1,59 @@
+:root[data-theme="dark"] .note-search {
+  border-color: var(--line);
+  color: #a5b1a4;
+}
+
+:root[data-theme="dark"] .note-search input {
+  color: var(--ink);
+}
+
+:root[data-theme="dark"] .dashboard-intro h1 {
+  color: var(--ink);
+}
+
+:root[data-theme="dark"] .stat-item {
+  border-color: var(--line);
+}
+
+:root[data-theme="dark"] .stat-item:hover {
+  background: rgba(162, 196, 162, .08);
+}
+
+:root[data-theme="dark"] .quick-action {
+  border-color: var(--line);
+  background: #202822;
+  color: var(--ink);
+}
+
+:root[data-theme="dark"] .quick-action:hover {
+  border-color: #596a5a;
+}
+
+:root[data-theme="dark"] .recent-copy strong,
+:root[data-theme="dark"] .post-row>strong {
+  color: #dce5db;
+}
+
+:root[data-theme="dark"] .post-status {
+  background: #303a31;
+  color: #b6c1b4;
+}
+
+:root[data-theme="dark"] .post-status.published {
+  background: #2e4232;
+  color: #b9d9bb;
+}
+
+:root[data-theme="dark"] .post-search input {
+  color: var(--ink);
+}
+
+:root[data-theme="dark"] .post-content {
+  color: var(--ink);
+}
+
+:root[data-theme="dark"] .post-editor-footer select {
+  border-color: var(--line);
+  background: #202822;
+  color: var(--ink);
+}

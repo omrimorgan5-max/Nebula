@@ -1,0 +1,47 @@
+@media (max-width: 390px) {
+  .auth-screen {
+    padding: 0 15px;
+  }
+
+  .auth-story h1 {
+    font-size: 35px;
+  }
+
+  .paper-stack {
+    right: -3px;
+    transform: scale(.52) rotate(6deg);
+  }
+
+  .auth-form-wrap {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+
+  .auth-footer span:last-child {
+    display: none;
+  }
+
+  .workspace-header {
+    padding: 0 10px;
+  }
+
+  .header-actions {
+    gap: 6px;
+  }
+
+  .save-state {
+    font-size: 8px;
+  }
+
+  .breadcrumb {
+    font-size: 8px;
+  }
+
+  .breadcrumb strong {
+    font-size: 8px;
+  }
+
+  .content-area {
+    padding: 0 15px;
+  }
+}

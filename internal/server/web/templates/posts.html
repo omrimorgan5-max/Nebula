@@ -1,0 +1,15 @@
+        <section class="posts-view" id="posts-view" hidden>
+          <div class="posts-heading"><div><p class="eyebrow">YOUR WRITING / POSTS</p><h1>A place for the longer story.</h1><p class="files-subtitle">Drafts and ready posts stay private to your account.</p></div><button class="primary-button" id="new-post" type="button">Write a post <span aria-hidden="true">↗</span></button></div>
+          <label class="post-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.5 4.5"/></svg><input id="post-search" type="search" placeholder="Search your posts and tags" aria-label="Search posts"></label>
+          <div class="post-filters" role="tablist" aria-label="Filter posts"><button class="post-filter active" data-post-filter="all" type="button" role="tab" aria-selected="true">All</button><button class="post-filter" data-post-filter="draft" type="button" role="tab" aria-selected="false">Drafts</button><button class="post-filter" data-post-filter="published" type="button" role="tab" aria-selected="false">Ready · private</button></div>
+          <div class="post-list" id="post-list"></div>
+          <div class="post-editor" id="post-editor" hidden>
+            <div class="post-editor-top"><button class="text-button" id="back-posts" type="button">← Back to posts</button><span class="post-private"><span></span> PRIVATE TO YOUR ACCOUNT</span><button class="text-button delete-note" id="delete-post" type="button">Delete post</button></div>
+            <input class="post-title" id="post-title" type="text" maxlength="160" placeholder="Give this story a title" aria-label="Post title">
+            <input class="content-tags-input post-tags-input" id="post-tags" type="text" maxlength="300" placeholder="Add tags, separated by commas" aria-label="Post tags">
+            <p class="post-lede">A thought, a story, a moment worth writing down.</p>
+            <textarea class="post-content" id="post-content" maxlength="1000000" placeholder="Start writing..." aria-label="Post content"></textarea>
+            <div class="post-editor-footer"><span id="post-save-status">Saved privately</span><div><label class="status-label" for="post-status">STATUS</label><select id="post-status"><option value="draft">Draft</option><option value="published">Ready · private</option></select><button class="primary-button" id="save-post" type="button">Save post</button></div></div>
+          </div>
+          <div class="posts-empty" id="posts-empty" hidden><span class="eyebrow">A NEW PAGE</span><h2>Your next story starts here.</h2><p>Collect the longer thoughts in one quiet place.</p><button class="primary-button" id="empty-post-create" type="button">Write your first post <span aria-hidden="true">↗</span></button></div>
+        </section>

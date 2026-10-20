@@ -1,0 +1,6 @@
+.env
+/files/
+/nebula
+*.db
+*.db-shm
+*.db-wal

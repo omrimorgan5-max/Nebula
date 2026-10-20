@@ -1,0 +1,94 @@
+@media (max-width: 760px) {
+
+  .dashboard-view,
+  .posts-view {
+    padding: 30px 0 42px;
+  }
+
+  .dashboard-intro h1 {
+    font-size: 30px;
+  }
+
+  .dashboard-stats .stat-item {
+    min-height: 95px;
+    padding: 13px 10px;
+  }
+
+  .stat-item:first-child {
+    padding-left: 2px;
+  }
+
+  .stat-item strong {
+    font-size: 31px;
+  }
+
+  .stat-caption {
+    font-size: 8px;
+  }
+
+  .dashboard-quick-actions {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .dashboard-quick-actions>.section-kicker {
+    grid-column: 1 / -1;
+  }
+
+  .quick-action {
+    gap: 5px;
+    padding: 0 6px;
+    font-size: 9px;
+  }
+
+  .quick-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .dashboard-recent {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .posts-heading {
+    align-items: flex-start;
+  }
+
+  .posts-heading h1 {
+    font-size: 29px;
+  }
+
+  .posts-heading .primary-button {
+    flex: 0 0 auto;
+    min-height: 36px;
+    padding: 0 10px;
+    font-size: 10px;
+  }
+
+  .post-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .post-row time {
+    display: none;
+  }
+
+  .post-title {
+    margin-top: 25px;
+    font-size: 32px;
+  }
+
+  .post-editor-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .post-editor-footer>div {
+    width: 100%;
+  }
+
+  .post-editor-footer select {
+    flex: 1;
+  }
+}

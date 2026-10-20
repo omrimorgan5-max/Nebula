@@ -1,0 +1,309 @@
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #171c19;
+  --white: #222a25;
+  --ink: #e6ece5;
+  --muted: #a1ada2;
+  --line: #343e36;
+  --green: #a5c5a8;
+  --green-dark: #b9d5ba;
+  --green-wash: #29362d;
+  --coral: #e58a6c;
+}
+
+:root[data-theme="dark"] body {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+:root[data-theme="dark"] .auth-screen {
+  background: radial-gradient(ellipse at 26% 62%, rgba(91, 119, 91, .15), transparent 42%), var(--paper);
+}
+
+:root[data-theme="dark"] .auth-topbar,
+:root[data-theme="dark"] .auth-footer {
+  border-color: rgba(224, 235, 224, .1);
+}
+
+:root[data-theme="dark"] .top-note,
+:root[data-theme="dark"] .story-copy,
+:root[data-theme="dark"] .privacy-note,
+:root[data-theme="dark"] .auth-form-wrap .form-subtitle,
+:root[data-theme="dark"] .auth-foot,
+:root[data-theme="dark"] .auth-footer,
+:root[data-theme="dark"] .auth-footer span:last-child {
+  color: #a4aea4;
+}
+
+:root[data-theme="dark"] .auth-panel {
+  border-color: #354139;
+  background: rgba(34, 42, 37, .94);
+  box-shadow: 0 17px 48px rgba(0, 0, 0, .18);
+}
+
+:root[data-theme="dark"] .auth-tabs {
+  border-color: var(--line);
+}
+
+:root[data-theme="dark"] .auth-tab {
+  color: #a0aaa0;
+}
+
+:root[data-theme="dark"] .auth-tab.active {
+  color: var(--green);
+}
+
+:root[data-theme="dark"] #auth-form label {
+  color: #c2cbc2;
+}
+
+:root[data-theme="dark"] #auth-form input {
+  border-color: #3b463d;
+  background: #1b221d;
+  color: var(--ink);
+}
+
+:root[data-theme="dark"] #auth-form input::placeholder {
+  color: #758076;
+}
+
+:root[data-theme="dark"] .paper-back {
+  background: #685347;
+}
+
+:root[data-theme="dark"] .paper-front {
+  background: #2a3029;
+}
+
+:root[data-theme="dark"] .paper-line {
+  background: #444b40;
+}
+
+:root[data-theme="dark"] .paper-date {
+  color: #b1b3a5;
+}
+
+:root[data-theme="dark"] .sidebar {
+  border-color: var(--line);
+  background: #1d241f;
+}
+
+:root[data-theme="dark"] .side-top {
+  border-color: var(--line);
+}
+
+:root[data-theme="dark"] .nav-item {
+  color: #b2bdb2;
+}
+
+:root[data-theme="dark"] .nav-item.selected,
+:root[data-theme="dark"] .note-list-item.active {
+  background: #2a382e;
+  color: #b4d1b7;
+}
+
+:root[data-theme="dark"] .note-list-item:hover {
+  background: #27312a;
+}
+
+:root[data-theme="dark"] .note-list-title,
+:root[data-theme="dark"] .account-name {
+  color: #d0d9d0;
+}
+
+:root[data-theme="dark"] .note-list-preview,
+:root[data-theme="dark"] .note-list-empty {
+  color: #9ba69b;
+}
+
+:root[data-theme="dark"] .storage-tip {
+  border-color: #364238;
+  background: #232d26;
+  color: #b1bbb0;
+}
+
+:root[data-theme="dark"] .avatar {
+  background: #334638;
+  color: #c5dfc5;
+}
+
+:root[data-theme="dark"] .account-row,
+:root[data-theme="dark"] .side-rule {
+  border-color: var(--line);
+}
+
+:root[data-theme="dark"] .workspace-header {
+  border-color: var(--line);
+  background: rgba(31, 39, 33, .92);
+}
+
+:root[data-theme="dark"] .breadcrumb strong {
+  color: #bec9bd;
+}
+
+:root[data-theme="dark"] .empty-page {
+  border-color: #424c42;
+  background: #262e28;
+  box-shadow: 8px 7px 0 #303a31;
+}
+
+:root[data-theme="dark"] .empty-page i {
+  background: #586859;
+}
+
+:root[data-theme="dark"] .empty-state>p:not(.eyebrow),
+:root[data-theme="dark"] .files-subtitle {
+  color: #a8b2a8;
+}
+
+:root[data-theme="dark"] .note-title {
+  color: #e7ece5;
+}
+
+:root[data-theme="dark"] .note-title::placeholder {
+  color: #79857b;
+}
+
+:root[data-theme="dark"] .editor-toolbar {
+  border-color: var(--line);
+  background: #202821;
+}
+
+:root[data-theme="dark"] .editor-toolbar select {
+  color: #c3cdc2;
+}
+
+:root[data-theme="dark"] .format-button {
+  color: #bfccbf;
+}
+
+:root[data-theme="dark"] .format-button:hover,
+:root[data-theme="dark"] .format-button.active {
+  border-color: #48594a;
+  background: #2d3b30;
+  color: #c7e0c8;
+}
+
+:root[data-theme="dark"] .toolbar-divider {
+  background: #414a41;
+}
+
+:root[data-theme="dark"] .editor-canvas {
+  border-color: var(--line);
+  background: #202722;
+  color: #d4ddd2;
+}
+
+:root[data-theme="dark"] .editor-canvas:empty::before {
+  color: #859084;
+}
+
+:root[data-theme="dark"] .editor-canvas b,
+:root[data-theme="dark"] .editor-canvas strong {
+  color: #edf2eb;
+}
+
+:root[data-theme="dark"] .upload-drop {
+  border-color: #465348;
+  background: rgba(34, 42, 37, .55);
+  color: #abb6ab;
+}
+
+:root[data-theme="dark"] .upload-drop:hover,
+:root[data-theme="dark"] .upload-drop.dragging {
+  border-color: #769278;
+  background: #26332a;
+}
+
+:root[data-theme="dark"] .upload-icon {
+  background: #2e3d31;
+  color: #bdd8be;
+}
+
+:root[data-theme="dark"] .upload-drop strong {
+  color: #c3cec2;
+}
+
+:root[data-theme="dark"] .files-table-header,
+:root[data-theme="dark"] .file-row {
+  border-color: #343e36;
+}
+
+:root[data-theme="dark"] .file-name-cell {
+  color: #d2dbd1;
+}
+
+:root[data-theme="dark"] .file-type-icon {
+  border-color: #3a463c;
+  background: #252e27;
+  color: #b6cbb6;
+}
+
+:root[data-theme="dark"] .download-button:hover {
+  border-color: #3b483e;
+  background: #252e27;
+  color: #c5ddc5;
+}
+
+:root[data-theme="dark"] .profile-dialog {
+  border-color: #3d4940;
+  background: #222a25;
+}
+
+:root[data-theme="dark"] .profile-copy {
+  color: #aab5aa;
+}
+
+:root[data-theme="dark"] .icon-button:hover {
+  border-color: #3f4b41;
+  background: #28322b;
+  color: #c3ddc4;
+}
+
+.note-search {
+  height: 31px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin: 4px 3px 5px;
+  padding: 0 8px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  color: #969e95;
+}
+
+.note-search svg {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+}
+
+.note-search input {
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 10px;
+}
+
+.note-search input::placeholder {
+  color: #a2a89f;
+}
+
+.pin-note.is-pinned {
+  color: var(--green);
+  font-weight: 700;
+}
+
+.editor-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}

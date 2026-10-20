@@ -1,0 +1,48 @@
+  <div class="auth-screen" id="auth-screen">
+    <header class="auth-topbar">
+      <a class="brand" href="/" aria-label="Nebula home"><span class="brand-mark" aria-hidden="true">n</span><span>nebula</span></a>
+      <span class="top-note">A little space, just for you</span>
+    </header>
+    <main class="auth-layout">
+      <section class="auth-story">
+        <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR PRIVATE DESK</div>
+        <h1>Room for<br><em>your thoughts.</em></h1>
+        <p class="story-copy">A calm corner for the things you want to keep. Notes, files, and ideas, all yours.</p>
+        <div class="paper-stack" aria-hidden="true">
+          <div class="paper paper-back"></div>
+          <div class="paper paper-front">
+            <span class="paper-date">A NOTE TO SELF</span>
+            <span class="paper-line line-long"></span>
+            <span class="paper-line line-medium"></span>
+            <span class="paper-line line-short"></span>
+            <span class="paper-script">begin anywhere.</span>
+          </div>
+          <span class="sparkle sparkle-one">✳</span>
+          <span class="sparkle sparkle-two">✳</span>
+        </div>
+        <div class="privacy-note"><span class="lock-icon" aria-hidden="true">◈</span><span>Private by design. Yours alone.</span></div>
+      </section>
+      <section class="auth-panel" aria-labelledby="auth-title">
+        <div class="auth-tabs" role="tablist" aria-label="Account access">
+          <button class="auth-tab active" id="signin-tab" type="button" role="tab" aria-selected="true">Sign in</button>
+          <button class="auth-tab" id="signup-tab" type="button" role="tab" aria-selected="false">Create account</button>
+        </div>
+        <div class="auth-form-wrap">
+          <p class="form-kicker" id="form-kicker">WELCOME BACK</p>
+          <h2 id="auth-title">Pick up where<br>you left off.</h2>
+          <p class="form-subtitle" id="form-subtitle">Your little corner is right where you left it.</p>
+          <form id="auth-form">
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" autocomplete="username" minlength="3" maxlength="32" pattern="[A-Za-z0-9_-]{3,32}" placeholder="e.g. alex_morgan" required>
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" autocomplete="current-password" minlength="10" maxlength="256" placeholder="At least 10 characters" required>
+            <p class="form-error" id="auth-error" role="alert" hidden></p>
+            <button class="primary-button auth-submit" id="auth-submit" type="submit"><span>Sign in to your space</span><span aria-hidden="true">↗</span></button>
+          </form>
+          <p class="auth-switch" id="auth-switch">New here? <button type="button" data-mode="signup">Create your account</button></p>
+        </div>
+        <div class="auth-foot"><span>Private account storage</span><span class="foot-dot"></span><span>Always yours</span></div>
+      </section>
+    </main>
+    <footer class="auth-footer"><span>NEBULA / PERSONAL SPACE</span><span>Made for the things worth keeping.</span></footer>
+  </div>

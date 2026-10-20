@@ -1,0 +1,42 @@
+        <section class="notes-view" id="notes-view" hidden>
+          <aside class="notes-sidebar" id="sidebar">
+            <div class="note-sidebar-heading"><div><span class="eyebrow">YOUR LIBRARY</span><h2>Notes</h2></div><div class="note-sidebar-actions"><button class="icon-button small mobile-close" id="close-sidebar" type="button" aria-label="Close note list" title="Close note list"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button><button class="icon-button small" id="new-note" type="button" aria-label="Create a new note" title="New note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div></div>
+            <label class="note-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.3"/><path d="m16 16 4.5 4.5"/></svg><input id="note-search" type="search" placeholder="Find a note" aria-label="Search notes"></label>
+            <div class="note-list" id="note-list"></div>
+          </aside>
+          <div class="sidebar-scrim" id="sidebar-scrim"></div>
+          <div class="notes-main">
+            <div class="notes-pagebar"><button class="icon-button mobile-notes-toggle" id="open-sidebar" type="button" aria-label="Show note list" title="Show note list"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button><div class="breadcrumb"><span>YOUR SPACE</span><span class="crumb-slash">/</span><strong>NOTES</strong></div><div class="header-actions"><span class="save-state" id="save-state"><span class="save-dot"></span><span>All changes saved</span></span><span class="header-divider"></span><span class="today-label" id="today-label"></span></div></div>
+          <div class="empty-state" id="empty-notes" hidden>
+            <div class="empty-illustration" aria-hidden="true"><span class="empty-sun"></span><span class="empty-page"><i></i><i></i><i></i></span></div>
+            <p class="eyebrow">A FRESH PAGE</p>
+            <h2>Start with a thought.</h2>
+            <p>Your notes stay private, tucked safely in your space.</p>
+            <button class="primary-button empty-create" id="empty-create" type="button">Write your first note <span aria-hidden="true">↗</span></button>
+          </div>
+          <article class="editor" id="editor" hidden>
+            <div class="editor-heading">
+              <div class="editor-meta"><span class="eyebrow">YOUR NOTES</span><span class="meta-divider">/</span><span id="edited-label">NEW NOTE</span></div>
+              <div class="editor-actions"><button class="text-button pin-note" id="pin-note" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 4 8 0 1 5 3 3v2H4v-2l3-3 1-5ZM12 14v7"/></svg><span>Pin</span></button><button class="text-button delete-note" id="delete-note" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6m4-6v6M6 7l1 14h10l1-14M9 7V4h6v3"/></svg><span>Delete</span></button></div>
+            </div>
+            <input class="note-title" id="note-title" type="text" maxlength="160" placeholder="Untitled note" aria-label="Note title">
+            <input class="content-tags-input note-tags-input" id="note-tags" type="text" maxlength="300" placeholder="Add tags, separated by commas" aria-label="Note tags">
+            <div class="editor-toolbar" role="toolbar" aria-label="Text formatting">
+              <label class="font-label" for="font-family">FONT</label>
+              <select id="font-family" aria-label="Font family">
+                <option value="Georgia">Georgia</option>
+                <option value="Arial">Arial</option>
+                <option value="Trebuchet MS">Trebuchet</option>
+                <option value="Courier New">Courier</option>
+              </select>
+              <span class="toolbar-divider"></span>
+              <button class="format-button" id="bold-button" type="button" aria-label="Bold" title="Bold (Ctrl+B)"><strong>B</strong></button>
+              <button class="format-button italic-button" id="italic-button" type="button" aria-label="Italic" title="Italic (Ctrl+I)"><em>I</em></button>
+              <span class="toolbar-spacer"></span>
+              <span class="word-count" id="word-count">0 words</span>
+            </div>
+            <div class="editor-canvas" id="editor-canvas" contenteditable="true" role="textbox" aria-label="Note content" aria-multiline="true" data-placeholder="Start writing something worth keeping..."></div>
+            <div class="editor-footer"><span id="updated-label">A blank page is full of possibility.</span><span class="private-indicator"><span></span> ONLY YOU CAN SEE THIS</span></div>
+          </article>
+          </div>
+        </section>

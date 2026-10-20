@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8f4">
+  <meta name="description" content="A quiet, private place for your notes and files.">
+  <title>Nebula — your private space</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <script defer src="/static/js/state.js"></script>
+  <script defer src="/static/js/account.js"></script>
+  <script defer src="/static/js/dashboard.js"></script>
+  <script defer src="/static/js/notes.js"></script>
+  <script defer src="/static/js/files-api.js"></script>
+  <script defer src="/static/js/posts.js"></script>
+  <script defer src="/static/js/files-ui.js"></script>
+  <script defer src="/static/js/navigation.js"></script>
+  <script defer src="/static/js/app.js"></script>
+</head>
+<body>
+{{template "auth.html" .}}
+{{template "navigation.html" .}}
+{{template "dashboard.html" .}}
+{{template "notes.html" .}}
+{{template "posts.html" .}}
+{{template "files.html" .}}
+</main>
+</div>
+{{template "profile.html" .}}
+{{template "toast.html" .}}
+</div>
+</body>
+</html>
