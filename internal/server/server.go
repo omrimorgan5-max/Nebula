@@ -139,7 +139,6 @@ func Run() {
 			tags TEXT NOT NULL DEFAULT '[]',
 			status TEXT NOT NULL DEFAULT 'draft' CHECK(status IN ('draft', 'published')),
 			is_public INTEGER NOT NULL DEFAULT 0,
-			is_public INTEGER NOT NULL DEFAULT 0,
 			created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 			updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 		);`); err != nil {
