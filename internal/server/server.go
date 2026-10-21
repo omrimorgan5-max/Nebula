@@ -1,6 +1,9 @@
 package server
 
 import (
+	"context"
+	"syscall"
+	"os/signal"
 	"database/sql"
 	"embed"
 	"errors"
@@ -211,9 +214,38 @@ func Run() {
 	mux.HandleFunc("GET /posts", app.renderPage)
 	mux.HandleFunc("GET /files", app.renderPage)
 	addr := env("ADDR", ":8080")
-	log.Printf("Nebula listening on %s", addr)
-	httpServer := &http.Server{Addr: addr, Handler: securityHeaders(mux), ReadHeaderTimeout: 10 * time.Second, IdleTimeout: 90 * time.Second}
-	log.Fatal(httpServer.ListenAndServe())
+    log.Printf("Nebula listening on %s", addr)
+    
+    httpServer := &http.Server{
+        Addr:              addr, 
+        Handler:           securityHeaders(mux), 
+        ReadHeaderTimeout: 10 * time.Second, 
+        IdleTimeout:       90 * time.Second,
+    }
+
+    // 1. Start the HTTP server in a goroutine so it doesn't block
+    go func() {
+        if err := httpServer.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
+            log.Printf("HTTP server error: %v", err)
+        }
+    }()
+
+    // 2. Listen for interrupt signals (Ctrl+C, SIGTERM)
+    stop := make(chan os.Signal, 1)
+    signal.Notify(stop, os.Interrupt, syscall.SIGTERM)
+    <-stop // Block until a signal is received
+
+    log.Println("Shutting down server...")
+
+    // 3. Gracefully shut down the HTTP server
+    ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+    defer cancel()
+
+    if err := httpServer.Shutdown(ctx); err != nil {
+        log.Printf("Server forced shutdown: %v", err)
+    }
+
+    log.Println("Server exited cleanly.")
 }
 
 func (a *application) renderPage(w http.ResponseWriter, r *http.Request) {
