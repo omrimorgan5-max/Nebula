@@ -35,6 +35,7 @@ func (a *application) dashboard(w http.ResponseWriter, r *http.Request) {
 			writeError(w, http.StatusInternalServerError, "Could not load your dashboard.")
 			return
 		}
+		rows.Err()
 		item.Tags = decodeTags(tags)
 		recentNotes = append(recentNotes, item)
 	}
@@ -56,6 +57,7 @@ func (a *application) dashboard(w http.ResponseWriter, r *http.Request) {
 			writeError(w, http.StatusInternalServerError, "Could not load your dashboard.")
 			return
 		}
+		postRows.Err()
 		item.Tags = decodeTags(tags)
 		recentPosts = append(recentPosts, item)
 	}

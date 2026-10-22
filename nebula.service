@@ -1,0 +1,20 @@
+[Unit]
+Description=Nebula - private notes and file space
+After=network.target
+
+[Service]
+Type=simple
+User=nebula
+Group=nebula
+WorkingDirectory=/var/lib/nebula
+ExecStart=/usr/local/bin/nebula
+Environment=DATA_DIR=/var/lib/nebula
+Environment=ADDR=:8080
+# Optional on a tiny-RAM box: keeps Go's heap from growing past ~120 MB
+# Environment=GOMEMLIMIT=120MiB
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

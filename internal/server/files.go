@@ -28,6 +28,7 @@ func (a *application) listFiles(w http.ResponseWriter, r *http.Request) {
 			writeError(w, http.StatusInternalServerError, "Could not load files.")
 			return
 		}
+		rows.Err()
 		files = append(files, item)
 	}
 	writeJSON(w, http.StatusOK, files)

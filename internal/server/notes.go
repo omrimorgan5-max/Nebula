@@ -30,6 +30,7 @@ func (a *application) listNotes(w http.ResponseWriter, r *http.Request) {
 			writeError(w, http.StatusInternalServerError, "Could not load notes.")
 			return
 		}
+		rows.Err()
 		item.Tags = decodeTags(tags)
 		notes = append(notes, item)
 	}
@@ -197,6 +198,7 @@ func ensureNotePinnedColumn(db *sql.DB) error {
 		if name == "pinned" {
 			found = true
 		}
+		rows.Err()
 	}
 	if err := rows.Close(); err != nil {
 		return err

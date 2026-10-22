@@ -25,6 +25,7 @@ func (a *application) listPosts(w http.ResponseWriter, r *http.Request) {
 			writeError(w, http.StatusInternalServerError, "Could not load posts.")
 			return
 		}
+		rows.Err()
 		item.Tags = decodeTags(tags)
 		posts = append(posts, item)
 	}
